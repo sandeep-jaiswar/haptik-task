@@ -1,0 +1,12 @@
+.friends-list-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.contact-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin: 0.5rem 1rem;
+}

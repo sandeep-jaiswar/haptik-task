@@ -1,0 +1,10 @@
+.action-icon-wrapper {
+  position: absolute;
+  border: 1px solid #ddd;
+  border-radius: 5%;
+  width: 1.875rem;
+  height: 1.875rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
