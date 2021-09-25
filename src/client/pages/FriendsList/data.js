@@ -1,6 +1,6 @@
 const data = [
   {
-    name: "Sandeep Jaiswar",
+    name: "Mihir Panchal",
     isFavourite: false,
     favPriority: 0
   },

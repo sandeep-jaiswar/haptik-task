@@ -6,7 +6,7 @@ const Card = (props) => {
   return (
     <div
       className="card-wrapper"
-      style={{ width: `${isMobile ? "20rem" : "30rem"}` }}
+      style={{ width: `${isMobile ? "15rem" : "30rem"}` }}
     >
       <div className="card-content">{children}</div>
     </div>
