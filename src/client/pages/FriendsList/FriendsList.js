@@ -31,7 +31,10 @@ const FriendsList = (props) => {
   };
 
   useEffect(() => {
-    dispatch(getFriends());
+    const getData = () => {
+      dispatch(getFriends());
+    };
+    getData();
   }, []);
   return (
     <div className="friends-list-wrapper">
