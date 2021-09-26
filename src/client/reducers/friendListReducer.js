@@ -16,13 +16,10 @@ export const friendListReducer = (state = initialState, action) => {
     case GET_FRIENDS:
       return { ...state, friends: payload };
     case DELETE_FRIEND:
-      return { ...state };
+      let newState = state.friends.filter((obj) => obj.id !== payload);
+      return { ...state, friends: newState };
     case ADD_FRIEND:
-      return { ...state, payload };
-    case MARK_FAV:
-      return { ...state };
-    case UNMARK_FAV:
-      return { ...state };
+      return { ...state, friends: [...state.friends, payload] };
     default:
       return { ...state };
   }

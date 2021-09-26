@@ -1,24 +1,29 @@
-import { firestore } from "../../config/firebaseConfig";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc
+} from "firebase/firestore/lite";
+import { db, firestore } from "../../config/firebaseConfig";
 import {
   ADD_FRIEND,
   DELETE_FRIEND,
-  GET_FRIENDS,
-  MARK_FAV,
-  UNMARK_FAV
+  GET_FRIENDS
 } from "../constants/FriendListConstants";
 
 export const getFriends = () => {
   return async (dispatch) => {
     try {
-      const ref = firestore.collection("friends");
-      const snapshot = await ref.get();
-      let friends = [];
-      snapshot.forEach((doc) => {
-        friends.push(doc.data());
+      const friendsList = collection(db, "friends");
+      const snapshot = await getDocs(friendsList);
+      const snapshotData = snapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
       });
       dispatch({
         type: GET_FRIENDS,
-        payload: friends
+        payload: snapshotData
       });
     } catch (e) {
       console.log(e, "e");
@@ -26,37 +31,52 @@ export const getFriends = () => {
   };
 };
 
-export const deleteFriend = (input) => {
-  return {
-    type: DELETE_FRIEND,
-    payload: input
-  };
-};
-
-export const addFriend = (input) => {
+export const deleteFriend = (id) => {
   return async (dispatch) => {
     try {
-      firestore.collection("friends").add(input);
-      dispatch({
-        type: ADD_FRIEND,
-        payload: input
-      });
+      await deleteDoc(doc(db, "friends", id));
+      dispatch(getFriends());
     } catch (e) {
       console.log(e, "e");
     }
   };
 };
 
-export const markFavourite = (input) => {
-  return {
-    type: MARK_FAV,
-    payload: input
+export const addFriend = (friend) => {
+  return async (dispatch) => {
+    try {
+      await addDoc(collection(db, "friends"), friend);
+      dispatch(getFriends());
+    } catch (e) {
+      console.log(e, "e");
+    }
   };
 };
 
-export const unmarkFavourite = (input) => {
-  return {
-    type: UNMARK_FAV,
-    payload: input
+export const markFavourite = (friend) => {
+  return async (dispatch) => {
+    try {
+      await setDoc(doc(db, "friends", friend.id), {
+        ...friend,
+        isFavourite: true
+      });
+      dispatch(getFriends());
+    } catch (e) {
+      console.log(e, "e");
+    }
+  };
+};
+
+export const unmarkFavourite = (friend) => {
+  return async (dispatch) => {
+    try {
+      await setDoc(doc(db, "friends", friend.id), {
+        ...friend,
+        isFavourite: false
+      });
+      dispatch(getFriends());
+    } catch (e) {
+      console.log(e, "e");
+    }
   };
 };

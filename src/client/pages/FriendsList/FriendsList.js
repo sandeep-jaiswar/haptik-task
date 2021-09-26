@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { addFriend, getFriends } from "../../actions/friendListActions";
 import Card from "../../components/card/Card";
@@ -10,8 +10,13 @@ import FriendsDetail from "./FriendsDetail";
 
 const FriendsList = (props) => {
   const frndInput = useRef(null);
+  const [filterKey, setFilterKey] = useState("");
   const dispatch = useDispatch();
   const data = useSelector((state) => state.friendsData.friends, shallowEqual);
+  const onChange = (e) => {
+    setFilterKey(e.target.value);
+  };
+
   useEffect(() => {
     dispatch(getFriends());
   }, []);
@@ -19,11 +24,13 @@ const FriendsList = (props) => {
     <div className="friends-list-wrapper">
       <Card isMobile={window.isMobile}>
         <TitleBar title="Friends List" />
-        <SearchBar ref={frndInput} />
+        <SearchBar ref={frndInput} filterKey={filterKey} onChange={onChange} />
         <Divider />
-        {data.map((cur, index) => {
-          return FriendsDetail(cur, index);
-        })}
+        {data
+          .filter((item) => item?.name.includes(filterKey))
+          .map((cur, index) => {
+            return <FriendsDetail friend={cur} index={index} />;
+          })}
       </Card>
     </div>
   );

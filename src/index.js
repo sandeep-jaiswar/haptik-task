@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import FriendsList from "./client/pages/FriendsList/FriendsList";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import FriendsList from "./client/pages/FriendsList/FriendsList";
 import store from "./store/createStore";
-import { Provider } from "react-redux";
-import FirebaseDB from "./config/firebaseConfig";
 
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 if (isMobile) {
