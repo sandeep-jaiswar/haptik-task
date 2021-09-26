@@ -4,7 +4,7 @@ import { addFriend } from "../../actions/friendListActions";
 import "./search-bar.css";
 
 const SearchBar = forwardRef((props, ref) => {
-  const { filterKey, onChange } = props;
+  const { filterKey, onChange, clearInput } = props;
   const dispatch = useDispatch();
 
   const onKeyPress = (e) => {
@@ -15,7 +15,8 @@ const SearchBar = forwardRef((props, ref) => {
           isFavourite: false
         })
       );
-      ref.current.value = "";
+      //ref.current.value = "";
+      clearInput();
     }
   };
 

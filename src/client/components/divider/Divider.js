@@ -1,7 +1,7 @@
 import "./divider.css";
 
 const Divider = (props) => {
-  return <hr className="divider" />;
+  return <div className="divider" />;
 };
 
 export default Divider;
