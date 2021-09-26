@@ -35,7 +35,8 @@ const FriendsList = (props) => {
       dispatch(getFriends());
     };
     getData();
-  }, []);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  
   return (
     <div className="friends-list-wrapper">
       <Card isMobile={window.isMobile}>
