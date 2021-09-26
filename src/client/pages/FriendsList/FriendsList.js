@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { addFriend, getFriends } from "../../actions/friendListActions";
+import { getFriends } from "../../actions/friendListActions";
 import Card from "../../components/card/Card";
 import Divider from "../../components/divider/Divider";
 import Paginator from "../../components/paginator/Paginator";
 import SearchBar from "../../components/searchBar/SearchBar";
 import TitleBar from "../../components/titleBar/TitleBar";
 import "./friends-list.css";
-import FriendsDetail from "./FriendsDetail";
 
 const FriendsList = (props) => {
   const frndInput = useRef(null);
@@ -49,6 +48,7 @@ const FriendsList = (props) => {
         />
         <Divider />
         <Paginator
+          itemsPerPage={4}
           data={sortArr(data.filter((item) => item?.name?.includes(filterKey)))}
         ></Paginator>
       </Card>

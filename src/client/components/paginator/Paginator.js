@@ -3,9 +3,8 @@ import { AiOutlineCaretLeft, AiOutlineCaretRight } from "react-icons/ai";
 import FriendsDetail from "../../pages/FriendsList/FriendsDetail";
 import ActionIcon from "../actionIcon/ActionIcon";
 import "./paginator.css";
-const Paginator = ({ data, children }) => {
+const Paginator = ({ data, itemsPerPage }) => {
   const [activePage, setActivePage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(4);
   const indexOfLastItem = activePage * itemsPerPage;
   const indexOfFirsttItem = indexOfLastItem - itemsPerPage;
   const currentPageData = data.slice(indexOfFirsttItem, indexOfLastItem);

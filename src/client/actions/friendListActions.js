@@ -6,12 +6,8 @@ import {
   getDocs,
   setDoc
 } from "firebase/firestore/lite";
-import { db, firestore } from "../../config/firebaseConfig";
-import {
-  ADD_FRIEND,
-  DELETE_FRIEND,
-  GET_FRIENDS
-} from "../constants/FriendListConstants";
+import { db } from "../../config/firebaseConfig";
+import { GET_FRIENDS } from "../constants/FriendListConstants";
 
 export const getFriends = () => {
   return async (dispatch) => {

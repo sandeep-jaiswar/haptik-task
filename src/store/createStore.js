@@ -6,8 +6,10 @@ import { createStore } from "redux";
 const thunkMiddleWare = applyMiddleware(thunk, logger);
 let enhancers = thunkMiddleWare;
 
-export default (state = {}) => {
+const appStore = (state = {}) => {
   let store = null;
   store = createStore(reducers, state, enhancers);
   return store;
 };
+
+export default appStore;
